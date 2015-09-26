@@ -31,5 +31,8 @@ private:
 	void WaitForPreamble();
 	bool ReadSync();
 	void ReadValues();
+	void DecodeValues();
+	void ReverseValues();
+	void BuildResult();
 	String GetHexValue(byte byteValue);
 };

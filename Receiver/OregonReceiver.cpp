@@ -1,7 +1,3 @@
-// 
-// 
-// 
-
 #include "OregonReceiver.h"
 
 const int PreambleMin = 400;
@@ -13,6 +9,12 @@ const int SyncMax = 1020;
 unsigned long _timing = 0;
 
 const int MaxReadingsCount = 65;
+
+
+bool readValues[200];
+byte decodedValues[200];
+byte counter = 0;
+byte invertedValues[20];
 
 OregonReceiver::OregonReceiver(int pinId)
 {
@@ -29,7 +31,6 @@ void OregonReceiver::Receive(bool receivedData [])
 
 void OregonReceiver::ResetVariables()
 {
-	//_extractedValues = 0;
 	_counter = 0;
 	_timing = 0;
 }
@@ -42,9 +43,11 @@ void OregonReceiver::ReceiveSignal()
 	if (hasSync)
 	{
 		ReadValues();
+		DecodeValues();
+		ReverseValues();
+		BuildResult();
 	}
 }
-
 
 void OregonReceiver::WaitForPreamble()
 {
@@ -78,19 +81,12 @@ bool OregonReceiver::ReadSync()
 		   (_timing2 > SyncMin && _timing2 < SyncMax);
 }
 
-
 void OregonReceiver::ReadValues()
 {
-	bool isLowLong = false;
-	bool isHighLong = false;
-
-	bool readValues[200];
-
 	unsigned long low = 0;
 	unsigned long lastLow = micros();
 	unsigned long high = 0;
 
-	byte counter = 0;
 
 	Serial.println("");
 
@@ -108,55 +104,45 @@ void OregonReceiver::ReadValues()
 		counter += 2;
 	}
 
-	Serial.println("OUT OF THE LOOP");
-	Serial.println("");
-
-	for (size_t i = 1; i < counter; i++)
-	{
-		Serial.print(readValues[i]);
-	}
-
-	Serial.println("=========" + String(counter) + "==============");
 
 
+}
 
-
+void  OregonReceiver::DecodeValues()
+{
 	bool doubleShortAsOne = true;
 
-	byte decodedValues[200];
 	byte c = 1;
 	byte d = 0;
-	
+
 	while (c < counter)
 	{
 		if (readValues[c])
 		{
 			doubleShortAsOne = !doubleShortAsOne;
-			decodedValues[d] = doubleShortAsOne;		
+			decodedValues[d] = doubleShortAsOne;
 			c++;
 		}
 		else
 		{
 			decodedValues[d] = doubleShortAsOne;
-			c += 2;			
+			c += 2;
 		}
 
 		d++;
 	}
+}
 
-	Serial.println("========= INVERTING ==============");
-
-
-	byte invertedValues[20];
-
+void  OregonReceiver::ReverseValues()
+{
 	invertedValues[0] = 15;
 
 	int i;
 
-	for (i = 1; i < 20 ; i++)
+	for (i = 1; i < 20; i++)
 	{
 		byte val = 0;
-		
+
 		int j;
 
 		for (j = 3; j >= 0; j = j - 1)
@@ -172,12 +158,13 @@ void OregonReceiver::ReadValues()
 
 		invertedValues[i] = val;
 	}
+}
 
-	Serial.println("");
-
+void  OregonReceiver::BuildResult()
+{
 	int cs;
 	byte checkSumResult = 0;
-	for  (cs = 0; cs < 15; cs++)
+	for (cs = 0; cs < 15; cs++)
 	{
 		checkSumResult += invertedValues[cs];
 	}
@@ -205,40 +192,9 @@ void OregonReceiver::ReadValues()
 
 	Serial.println("");
 	Serial.println("#################################");
-	
-
 }
 
 String OregonReceiver::GetHexValue(byte byteValue)
 {
 	return String(byteValue, HEX);
 }
-
-
-//void OregonReceiver::ReadValues()
-//{
-//	bool isLowLong = false;
-//	bool isHighLong = false; 
-//	
-//	bool lowHighValues[128];
-//
-//	for (size_t i = 0; i < 126; i = i + 2)
-//	{
-//		lowHighValues[i] = pulseIn(_pinId, LOW, 1000000) > 600;
-//		lowHighValues[i + 1] = pulseIn(_pinId, HIGH, 1000000) > 600;
-//	}
-//
-//	Serial.println("=======================");
-//
-//
-//	for (size_t i = 0; i < 127; i++)
-//	{
-//		Serial.print(String(lowHighValues[i]));
-//	}
-//
-//	Serial.println("");
-//	Serial.println("=======================");
-//
-//}
-
-
