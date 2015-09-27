@@ -17,22 +17,13 @@ class OregonReceiver
 
 public:
 	OregonReceiver(int pinId);
-	void Receive(bool receivedData []);
+	String Receive();
 
 private:
-	int _pinId;
-	bool* _readValues;
-	unsigned long _extractedValues;
-	int _counter;
-	unsigned long _timing;
-
 	void ResetVariables();
 	void ReceiveSignal();
 	void WaitForPreamble();
 	bool ReadSync();
 	void ReadValues();
-	void DecodeValues();
-	void ReverseValues();
-	void BuildResult();
-	String GetHexValue(byte byteValue);
+	
 };

@@ -24,9 +24,15 @@
     <ClInclude Include="OregonReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OregonDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OregonReceiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OregonDecoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

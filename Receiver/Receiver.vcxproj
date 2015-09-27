@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\variants\standard;E:\Arduino\Sketches\433.92\Oregon\Receiver;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jfpkav3i.efm\Micro Platforms\default\debuggers;D:\Documents\Arduino\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\variants\standard;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr/avr/include/;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr//avr/include/avr/;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\variants\standard;E:\Arduino\Sketches\433.92\Oregon\Receiver;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jfpkav3i.efm\Micro Platforms\default\debuggers;D:\Documents\Arduino\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\cores\arduino;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\variants\standard;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jfpkav3i.efm\Micro Platforms\default\debuggers\VM_DBG;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jfpkav3i.efm\Micro Platforms\default\debuggers;D:\Documents\Arduino\libraries;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr/avr/include/;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr//avr/include/avr/;E:\Arduino\arduino-1.6.5-r2-windows\arduino-1.6.5-r2\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>E:\Arduino\Sketches\433.92\Oregon\Receiver\Visual Micro\.Receiver.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=165;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -127,10 +127,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OregonDecoder.h" />
     <ClInclude Include="OregonReceiver.h" />
     <ClInclude Include="Visual Micro\.Receiver.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="OregonDecoder.cpp" />
     <ClCompile Include="OregonReceiver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
