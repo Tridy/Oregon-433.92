@@ -48,6 +48,7 @@ void OregonReceiver::ReceiveSignal()
 	}
 
 	ReadValues();
+
 	_receivedResult = OregonDecoder().DecodeValues(readValues, counter);
 }
 

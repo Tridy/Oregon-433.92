@@ -17,6 +17,9 @@ public:
 	String DecodeValues(bool readValues[], byte count);
 
 private:
+	byte _reversedValues[22];
+	byte _decodedValues[84];
+
 	void ReverseValues();
 	void BuildResult();
 	String GetHexValue(byte index);

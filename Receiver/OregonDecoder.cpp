@@ -1,8 +1,7 @@
 #include "OregonDecoder.h"
 
-byte _reversedValues[22];
 byte _counter;
-byte _decodedValues[22];
+
 String _result;
 
 OregonDecoder::OregonDecoder()
@@ -21,6 +20,8 @@ String OregonDecoder::DecodeValues(bool readValues[], byte count)
 
 	while (c < _counter)
 	{
+		//Serial.print("d");
+
 		if (readValues[c])
 		{
 			doubleShortAsOne = !doubleShortAsOne;
@@ -50,6 +51,8 @@ void  OregonDecoder::ReverseValues()
 
 	for (i = 1; i < 20; i++)
 	{
+		//Serial.print("r");
+
 		byte val = 0;
 
 		int j;
@@ -76,13 +79,14 @@ void OregonDecoder::BuildResult()
 
 	for (cs = 0; cs < 15; cs++)
 	{
+		//Serial.print("v");
 		checkSumResult += _reversedValues[cs];
 	}
 
 	String sensorId = GetHexValue(0) + GetHexValue(1) + GetHexValue(2) + GetHexValue(3);
 	String channel = GetHexValue(4);
 	String rollingCode = GetHexValue(5) + GetHexValue(6);
-	String lowBattery = _reversedValues[7] < 2 ? "Yes" : "No";
+	String lowBattery = _reversedValues[7] == 1 ? "Yes" : "No";
 	String temperature = (_reversedValues[11] == 0 ? "" : "-") + GetHexValue(10) + GetHexValue(9) + "." + GetHexValue(8);
 	String humidity = GetHexValue(13) + GetHexValue(12);
 	String checksum = GetHexValue(16) + GetHexValue(15);
