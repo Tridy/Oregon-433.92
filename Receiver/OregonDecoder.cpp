@@ -1,9 +1,5 @@
 #include "OregonDecoder.h"
 
-byte _counter;
-
-String _result;
-
 OregonDecoder::OregonDecoder()
 {
 	

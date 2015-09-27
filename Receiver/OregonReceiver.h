@@ -20,10 +20,17 @@ public:
 	String Receive();
 
 private:
+
+	unsigned long _timing;
+	bool _readValues[200];
+	String _receivedResult;
+	int _pinId;
+	unsigned long _extractedValues;
+	byte _counter;
+
 	void ResetVariables();
 	void ReceiveSignal();
 	void WaitForPreamble();
 	bool ReadSync();
 	void ReadValues();
-	
 };

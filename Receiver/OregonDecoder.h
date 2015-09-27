@@ -17,6 +17,8 @@ public:
 	String DecodeValues(bool readValues[], byte count);
 
 private:
+	byte _counter;
+	String _result;
 	byte _reversedValues[22];
 	byte _decodedValues[84];
 

@@ -7,18 +7,14 @@ const int PreambleMax = 540;
 const int SyncMin = 880;
 const int SyncMax = 1020;
 
-unsigned long _timing = 0;
+
 const int MaxReadingsCount = 65;
 
-bool readValues[200];
-String _receivedResult;
-int _pinId;
-unsigned long _extractedValues;
-byte counter;
+
 
 OregonReceiver::OregonReceiver(int pinId)
 {
-	counter = 0;
+	ResetVariables();
 	pinMode(pinId, INPUT);
 	_pinId = pinId;
 }
@@ -32,7 +28,7 @@ String OregonReceiver::Receive()
 
 void OregonReceiver::ResetVariables()
 {
-	counter = 0;
+	_counter = 0;
 	_timing = 0;
 }
 
@@ -49,7 +45,7 @@ void OregonReceiver::ReceiveSignal()
 
 	ReadValues();
 
-	_receivedResult = OregonDecoder().DecodeValues(readValues, counter);
+	_receivedResult = OregonDecoder().DecodeValues(_readValues, _counter);
 }
 
 void OregonReceiver::WaitForPreamble()
@@ -97,9 +93,9 @@ void OregonReceiver::ReadValues()
 		high = micros() - (lastLow + low);
 		lastLow = micros();
 
-		readValues[counter] = high > 800;
-		readValues[counter + 1] = low > 800;
+		_readValues[_counter] = high > 800;
+		_readValues[_counter + 1] = low > 800;
 
-		counter += 2;
+		_counter += 2;
 	}
 }
